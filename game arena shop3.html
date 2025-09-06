@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME ARENA SHOP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: rgb(214, 221, 217);
+            direction: rtl;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            animation: rotate 5s linear infinite;
+            margin: 0 20px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7700, #ffaa00, #ff5500, #ffcc00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 3s ease infinite;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            width: 100%;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: visible;
+            margin: 0 auto;
+            position: relative;
+            z-index: 90;
+        }
+
+        .main-menu {
+            background-color: #4a6fc7;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            border-radius: 8px;
+        }
+
+        .main-menu > li {
+            position: relative;
+        }
+
+        .main-menu > li > a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .main-menu > li:first-child > a {
+            border-left: none;
+        }
+
+        .main-menu > li > a:hover {
+            background-color: #3b5aa6;
+        }
+        .product {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            color: #4a6fc7;
+            margin-bottom: 10px;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 2;
+        }
+        .product-desc1{
+            font-size: 12px;
+            color: #555;
+            margin: 15px;
+            flex-grow: 3;
+        }
+
+        .buy-btn {
+            background-color: #e6c20c;
+            color: #333;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            transition: transform 0.2s ease;
+            margin-top: auto;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            text-decoration: line-through;
+            background-color: #4a6fc7;
+            transform: translateY(-12px);
+        }
+        .input-for-buy{
+            
+            padding: 15px;
+            
+        }
+        .input-aa{
+            border-radius: 9px ;
+            width: 300px;
+            height: 60px;
+            margin: 15px; 
+            
+            text-align: center;
+            border-width: 0.3px;
+            
+        }
+        .input-aa1{
+            display: block;
+            border-radius: 9px ;
+            width: 300px;
+            height: 60px;
+            margin: 15px; 
+            text-align: center;
+            border-width: 0.3px;
+        }
+        .input-aa:hover{
+            border-width: 0px;
+        }
+        .input-aa2{
+            
+            border-radius: 9px ;
+            width: 300px;
+            height: 60px;
+            margin: 15px; 
+            text-align: center;
+            border-width: 0.3px;
+        }
+        .input-aa4{
+            border-radius: 9px ;
+            width: 300px;
+            height: 60px;
+            margin: 15px; 
+            text-align: center;
+            border-width: 0.3px;  
+            background-color: #3b5aa6 ;
+        }
+        .input-aa3{
+            display: block;
+            width: 300px;
+            height: 60px;
+            margin: 15px; 
+            text-align: center;
+            border-width: 0.3px; 
+            border-radius: 9px;
+        }
+    </style>
+</head>
+<body >
+
+    <div class="header">
+        <div class="logo-container">
+            <img class="logo" src="تنزيل.png" alt="Game Arena Logo">
+        </div>
+        <h1 class="main-title">Game Arena</h1>
+        <p class="subtitle">It's Not a Game ... It's a Battle!</p>
+    </div>
+    <div class="container">
+        <ul class="main-menu">
+            <li>
+                <a href="game arena.html">
+                    <span>الرئيسية</span>
+                </a>
+            </li>
+            <li>
+    </div>
+        <div class="product">
+            <img src="مبرد.jpg" alt="مبرد Game Arena">
+            <p class="product-title">CLX360 ANTARTICA 6 Heatpipes Dual Towers</p>
+            <div class="product-desc">مبرد قيم الرينا للفئة العليا الأول CLX360 ANTARTICA:- يتحمل معالجات الفئة العليا التي تستهلك طاقة حتى 220W</div>
+            <div class="product-desc1">السعر 230LYD</div>
+        </div>
+    <div class="input-for-buy">
+        <input class="input-aa" type="text" required placeholder="ادخل اسمك ثلاثي " >
+        <input class="input-aa1" type="number" required placeholder="ادخل رقم الهاتف يكون +218" >
+        <input class="input-aa2" type="text" required placeholder="ادخل عنوان السكن" >
+        <input class="input-aa3" type="text" required placeholder="توصيل او تأتي الى المتجر" >
+        <button class="input-aa4" >submit</button>
+
+    </div>
+</body>
+</html>
