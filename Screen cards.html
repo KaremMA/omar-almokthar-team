@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAME ARENA SHOP</title>
+    <title>Game Arena</title>
     <style>
         * {
             margin: 0;
@@ -70,6 +70,8 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+
         .container {
             width: 100%;
             background-color: white;
@@ -111,6 +113,76 @@
         .main-menu > li > a:hover {
             background-color: #3b5aa6;
         }
+
+        .sub-menu {
+            position: absolute;
+            background-color: white;
+            width: 220px;
+            list-style: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+            right: 0;
+            text-align: right;
+        }
+
+        .main-menu > li:hover .sub-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .sub-menu li {
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .sub-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .sub-menu li a {
+            display: block;
+            padding: 14px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .sub-menu li a:hover {
+            background-color: #f0f5ff;
+            color: #4a6fc7;
+            padding-right: 25px;
+        }
+
+        .sub-menu .sub-menu {
+            right: 100%;
+            top: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+        }
+
+        .sub-menu li:hover > .sub-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
         .product {
             background-color: white;
             border-radius: 12px;
@@ -122,7 +194,9 @@
             height: 100%;
         }
 
-
+        .product:hover {
+            transform: translateY(-10px);
+        }
 
         .product img {
             width: 100%;
@@ -148,12 +222,6 @@
             margin-bottom: 15px;
             flex-grow: 2;
         }
-        .product-desc1{
-            font-size: 12px;
-            color: #555;
-            margin: 15px;
-            flex-grow: 3;
-        }
 
         .buy-btn {
             background-color: #e6c20c;
@@ -175,63 +243,8 @@
             background-color: #4a6fc7;
             transform: translateY(-12px);
         }
-        .input-for-buy{
-            
-            padding: 15px;
-            
-        }
-        .input-aa{
-            border-radius: 9px ;
-            width: 300px;
-            height: 60px;
-            margin: 15px; 
-            
-            text-align: center;
-            border-width: 0.3px;
-            
-        }
-        .input-aa1{
-            display: block;
-            border-radius: 9px ;
-            width: 300px;
-            height: 60px;
-            margin: 15px; 
-            text-align: center;
-            border-width: 0.3px;
-        }
-        .input-aa:hover{
-            border-width: 0px;
-        }
-        .input-aa2{
-            
-            border-radius: 9px ;
-            width: 300px;
-            height: 60px;
-            margin: 15px; 
-            text-align: center;
-            border-width: 0.3px;
-        }
-        .input-aa4{
-            border-radius: 9px ;
-            width: 300px;
-            height: 60px;
-            margin: 15px; 
-            text-align: center;
-            border-width: 0.3px;  
-            background-color: #3b5aa6 ;
-        }
-        .input-aa3{
-            display: block;
-            width: 300px;
-            height: 60px;
-            margin: 15px; 
-            text-align: center;
-            border-width: 0.3px; 
-            border-radius: 9px;
-        }
     </style>
 </head>
-<body >
 
     <div class="header">
         <div class="logo-container">
@@ -240,28 +253,49 @@
         <h1 class="main-title">Game Arena</h1>
         <p class="subtitle">It's Not a Game ... It's a Battle!</p>
     </div>
-    <div class="container">
+        <div class="container">
         <ul class="main-menu">
             <li>
                 <a href="game arena.html">
                     <span>الرئيسية</span>
                 </a>
             </li>
-            <li>
+        </ul>
     </div>
-        <div class="product">
-            <img src="mos.jpg" alt="ماوس Game Arena">
-            <p class="product-title">Game Arena SX7 PRESICION White</p>
-            <div class="product-desc">حساس PIXART PMW 3327 بسرعة تتبع 220ips والتسارع 30g ودقة 12400DPI يجعل الماوس أعلى من الفئة المتوسطة</div>
-            <div class="product-desc1">السعر 300LYD</div>
-        </div>
-    <div class="input-for-buy">
-        <input class="input-aa" type="text" required placeholder="ادخل اسمك ثلاثي " >
-        <input class="input-aa1" type="number" required placeholder="ادخل رقم الهاتف يكون +218" >
-        <input class="input-aa2" type="text" required placeholder="ادخل عنوان السكن" >
-        <input class="input-aa3" type="text" required placeholder="توصيل او تأتي الى المتجر" >
-        <button class="input-aa4" >اضف الى السلة</button>
+        <div class="products">
+                <div class="product">
+                <img src="كرت شاشة raider.jpg" alt="كرت الشاشة Raider AMD">
+                <p class="product-title">Raider AMD RX 6700 XT 12GB OC EDITION</p>
+                <div class="product-desc">Raider AMD RX 6700 XT 12GB OC EDITION- يمتاز الكرت بخامة ممتازة وتبريد عالي بحرارة قصوى عند الظروف ا..</div>
+                <a class="buy-btn" href="game arena shop5.html">شراء</a>
+            </div>
 
-    </div>
+            <div class="product">
+                <img src="حامل كروت الشاة الثقيلة.jpg" alt="لوحة أم Game Arena">
+                <p class="product-title">GRAPHICS CARD GPU 8cm STAND</p>
+                <div class="product-desc">GRAPHICS CARD GPU 8cm STAND..</div>
+                <a class="buy-btn" href="game arena shop4.html">شراء</a>
+            </div>
+
+            <div class="product"> 
+                <img src="كبلات rgb.jpg" alt="مبرد Game Arena">
+                <p class="product-title">8 PIN + 24 PIN ARGB 3PIN 5V CABLES COVER KIT</p>
+                <div class="product-desc">8 PIN + 24 PIN ARGB 3PIN 5V CABLES COVER KIT..</div>
+                <a href="game arena shop3.html" class="buy-btn">شراء</a>
+            </div>
+
+            <div class="product">
+                <img src="حامل كرت شاشة.jpg" alt="مزود طاقة Game Arena">
+                <p class="product-title">GRAPHICS CARD GPU ARGB 5V 3PIN STAND</p>
+                <div class="product-desc">GRAPHICS CARD GPU ARGB 5V 3PIN STAND..</div>
+                <a class="buy-btn" href="game arena shop2.html">شراء</a>
+            </div>
+
+            <div class="product">
+                <img src="كبل كرت شاشة.jpg" alt="ميكروفون Game Arena">
+                <p class="product-title">GPU Riser PCIE 3.0 16X 200mm 90 Degrees</p>
+                <div class="product-desc">GPU Riser PCIE 3.0 16X 200mm 90 Degrees..</div>
+                <a class="buy-btn" href="game arena shop1.html">شراء</a>
+            </div>
+        </div>
 </body>
-</html>
