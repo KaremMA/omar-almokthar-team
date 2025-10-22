@@ -17,6 +17,7 @@
 
     <div class="container">
 <ul class="main-menu">
+    <input type="text" class="input-aa" placeholder="ابحث عن منتج">
     <li>
         <a href="game arena.html">
             <span>الرئيسية</span>
@@ -45,13 +46,13 @@
         </ul>
     </li>
     <li>
-        <a href="#">
+        <a href="cart.html">
             <span>السلة</span>
             <span class="menu-icon">🛒</span>
         </a>
     </li>
     <li>
-        <a href="حساب جديد.html">
+        <a href="تسجيل دخول.html">
             <span>الحساب</span>
             <span class="menu-icon">📩</span>
         </a>
@@ -136,6 +137,85 @@
             <a class="buy-btn" href="game arena shop1.html">شراء</a>
         </div>
     </div>
+
+    <script>
+        (function(){
+            function getAdminProducts(){ try{ return JSON.parse(localStorage.getItem('gameArenaProducts')||'[]'); }catch(e){ return []; } }
+            function addToCart(item){
+                try{
+                    var cart = JSON.parse(localStorage.getItem('gameArenaCart')||'[]');
+                    var found = false;
+                    for(var i=0;i<cart.length;i++){
+                        if(cart[i].name === item.name && cart[i].price === item.price){ cart[i].qty = (cart[i].qty||1)+1; found=true; break; }
+                    }
+                    if(!found){ cart.push(Object.assign({qty:1}, item)); }
+                    localStorage.setItem('gameArenaCart', JSON.stringify(cart));
+                    alert('تم إضافة المنتج إلى السلة');
+                }catch(e){ console.error(e); alert('خطأ أثناء إضافة المنتج'); }
+            }
+
+            var adminProducts = getAdminProducts();
+            if(adminProducts && adminProducts.length){
+                var container = document.querySelector('.products');
+                adminProducts.forEach(function(p){
+                    var div = document.createElement('div'); div.className = 'product';
+                    var img = document.createElement('img'); img.src = p.image || 'تنزيل.png';
+                    var title = document.createElement('p'); title.className = 'product-title'; title.textContent = p.name || 'منتج';
+                    var desc = document.createElement('div'); desc.className = 'product-desc'; desc.textContent = p.desc || '';
+                    var a = document.createElement('a'); a.className = 'buy-btn'; a.href = '#'; a.textContent = 'شراء';
+                    a.addEventListener('click', function(e){ e.preventDefault(); addToCart({ name: p.name, price: p.price, image: p.image }); });
+                    div.appendChild(img); div.appendChild(title); div.appendChild(desc); div.appendChild(a);
+                    container.appendChild(div);
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        
+        (function(){
+            const input = document.querySelector('.input-aa');
+            if(!input) return;
+
+            const productsContainer = document.querySelector('.products');
+            const products = Array.from(document.querySelectorAll('.product'));
+
+            function normalize(s){
+                return (s||'').trim().toLowerCase();
+            }
+
+            function filterProducts(){
+                const q = normalize(input.value);
+                if(q === ''){
+                    products.forEach(p => p.style.display = '');
+                    return;
+                }
+
+                products.forEach(p => {
+                    const title = normalize(p.querySelector('.product-title')?.textContent);
+                    const desc = normalize(p.querySelector('.product-desc')?.textContent);
+                    const matches = title.includes(q) || desc.includes(q);
+                    p.style.display = matches ? '' : 'none';
+                });
+            }
+
+
+            let timer = null;
+            input.addEventListener('input', () => {
+                clearTimeout(timer);
+                timer = setTimeout(filterProducts, 150);
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape'){
+                    input.value = '';
+                    filterProducts();
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', filterProducts);
+        })();
+    </script>
 
     </body>
 </html>

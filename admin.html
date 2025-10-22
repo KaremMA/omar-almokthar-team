@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>لوحة تحكم المشرف - Game Arena</title>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;direction:rtl;padding:20px;background:#f7f7f7}
+        .card{background:white;border-radius:8px;padding:16px;box-shadow:0 3px 8px rgba(0,0,0,0.08);margin-bottom:12px}
+        label{display:block;margin:6px 0;font-weight:700}
+        input,textarea{width:100%;padding:8px;border:1px solid #ddd;border-radius:6px}
+        .row{display:flex;gap:12px}
+        .row > *{flex:1}
+        button{background:#4a6fc7;color:#fff;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+        .danger{background:#d9534f}
+        .products-list{margin-top:12px}
+        .product-item{display:flex;align-items:center;gap:12px;padding:8px;border-bottom:1px solid #eee}
+        .product-item img{width:80px;height:60px;object-fit:cover;border-radius:6px}
+        .small{font-size:13px;color:#666}
+    </style>
+</head>
+<body>
+    <h2>لوحة تحكم المشرف</h2>
+    <div class="card">
+        <div class="small">مع تسجيل الدخول بـ <strong>admin/admin</strong> سيتم الوصول إلى هذه الصفحة. هنا يمكنك إضافة منتجات جديدة تظهر في صفحة المتجر.</div>
+        <form id="productForm">
+            <label>اسم المنتج</label>
+            <input name="name" required />
+            <label>السعر (مثلاً 1200)</label>
+            <input name="price" type="number" required />
+            <label>رابط الصورة (اختياري)</label>
+            <input name="image" placeholder="images/product.png أو رابط خارجي" />
+            <label>وصف قصير</label>
+            <textarea name="desc"></textarea>
+            <div style="margin-top:10px;display:flex;gap:8px">
+                <button type="submit">إضافة/حفظ</button>
+                <button id="logout" type="button" class="danger">تسجيل خروج</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3>قائمة المنتجات (المضافة بواسطة المشرف)</h3>
+        <div id="products" class="products-list"></div>
+    </div>
+
+    <script>
+        (function(){
+            function getProducts(){ try{ return JSON.parse(localStorage.getItem('gameArenaProducts')||'[]'); }catch(e){return[]} }
+            function saveProducts(p){ localStorage.setItem('gameArenaProducts', JSON.stringify(p)); }
+
+            var list = document.getElementById('products');
+            var form = document.getElementById('productForm');
+
+            function render(){
+                var arr = getProducts();
+                list.innerHTML = '';
+                if(arr.length===0){ list.innerHTML = '<div class="small">لا توجد منتجات مضافة بعد.</div>'; return; }
+                arr.forEach(function(it, idx){
+                    var el = document.createElement('div'); el.className = 'product-item';
+                    var img = document.createElement('img'); img.src = it.image || 'تنزيل.png';
+                    var info = document.createElement('div');
+                    info.innerHTML = '<div style="font-weight:700">'+(it.name||'منتج')+'</div><div class="small">السعر: '+(it.price||0)+' LYD</div><div class="small">'+(it.desc||'')+'</div>';
+                    var actions = document.createElement('div');
+                    actions.style.marginLeft = 'auto';
+                    var del = document.createElement('button'); del.textContent = 'حذف'; del.className='danger';
+                    del.addEventListener('click', function(){ if(confirm('حذف هذا المنتج؟')){ var a = getProducts(); a.splice(idx,1); saveProducts(a); render(); }});
+                    actions.appendChild(del);
+                    el.appendChild(img); el.appendChild(info); el.appendChild(actions);
+                    list.appendChild(el);
+                });
+            }
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                var f = new FormData(form);
+                var p = { name: (f.get('name')||'').trim(), price: Number(f.get('price')||0), image: (f.get('image')||'').trim(), desc: (f.get('desc')||'').trim() };
+                if(!p.name){ alert('ادخل اسم المنتج'); return; }
+                var arr = getProducts(); arr.push(p); saveProducts(arr); render(); form.reset();
+            });
+
+            document.getElementById('logout').addEventListener('click', function(){ localStorage.removeItem('gameArenaIsAdmin'); alert('تم تسجيل الخروج'); window.location.href='تسجيل دخول.html'; });
+
+            // require admin flag, otherwise redirect back to login
+            try{ if(localStorage.getItem('gameArenaIsAdmin') !== '1'){ window.location.href = 'تسجيل دخول.html'; } }catch(e){}
+
+            render();
+        })();
+    </script>
+</body>
+</html>

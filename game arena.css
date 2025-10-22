@@ -236,3 +236,11 @@ body {
     background-color: #4a6fc7;
     transform: translateY(-12px);
 }
+.input-aa{
+    margin: 15px;
+    padding: 10px 15px;
+    width: 200px;
+    border: 2px solid #4a6fc7;
+    border-radius: 8px;
+    font-size: 16px;
+}

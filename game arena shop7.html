@@ -265,3 +265,21 @@
     </div>
 </body>
 </html>
+<script src="cart.js"></script>
+<script>
+    (function(){
+        var btn = document.querySelector('.input-aa4');
+        if(!btn) return;
+        btn.addEventListener('click', function(){
+            var prod = document.querySelector('.product');
+            if(!prod) return;
+            var name = prod.querySelector('.product-title') ? prod.querySelector('.product-title').innerText : 'منتج';
+            var priceEl = prod.querySelector('.product-desc1') || prod.querySelector('.product-desc');
+            var priceText = priceEl ? priceEl.innerText : '';
+            var price = parseFloat((priceText.match(/\d+(?:\.\d+)?/)||['0'])[0]);
+            var img = prod.querySelector('img') ? prod.querySelector('img').getAttribute('src') : '';
+            GameArenaCart.addToCart({id: Date.now().toString(), name: name, price: price, image: img});
+            window.location.href = 'cart.html';
+        });
+    })();
+</script>
